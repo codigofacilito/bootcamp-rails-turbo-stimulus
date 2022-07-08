@@ -1,12 +1,10 @@
-<div id="<%= dom_id phone_number %>">
-  <p>
-    <strong>Contact:</strong>
-    <%= phone_number.contact_id %>
-  </p>
-
-  <p>
-    <strong>Number:</strong>
+<div id="<%= dom_id phone_number %>" class="d-flex border-bottom py-2 mb-1">
+  <p class="text-secondary flex-grow-1 m-0">
+    <span class="bi bi-telephone-fill"></span>
     <%= phone_number.number %>
-  </p>
+  </p>  
+  <%= button_to phone_number, method: :delete, data: { turbo_confirm:"¿Seguro?"}, class:"button-link" do %>
+    <span class="bi bi-trash text-danger"></span>
+  <%end%>
 
 </div>

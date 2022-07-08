@@ -10,16 +10,14 @@
     </p>
   <% end %>
 
-  <p class="h5 mt-4">Teléfonos asociados</p>
+  
   <% if contact.phone_numbers.any? %>
-    <% contact.phone_numbers.each do |phone_number| %>
-      <p class="text-secondary">
-        <span class="bi bi-telephone-fill"></span>
-        <%= phone_number.number %>
-      </p>
-    <% end %>
+    <p class="h5 mt-4">Teléfonos asociados</p>
+    <%= render contact.phone_numbers %>
   <% else %>
     <p class="text-secondary">No hay números de teléfono asociados</p>
   <% end %>
-
+  <div class="actions mt-2 text-center">
+    <%=link_to "Editar", edit_contact_path(contact) %>
+  </div>
 </div>

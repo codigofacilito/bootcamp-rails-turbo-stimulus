@@ -13,6 +13,12 @@ class PhoneNumbersController < ApplicationController
   # GET /phone_numbers/new
   def new
     @phone_number = PhoneNumber.new
+    @index = params[:index]
+    respond_to do |format|
+      format.turbo_stream do 
+        render turbo_stream: turbo_stream.append("numbers", partial: "phone_numbers/nested_form", locals: { index: @index })
+      end
+    end
   end
 
   # GET /phone_numbers/1/edit
@@ -53,6 +59,7 @@ class PhoneNumbersController < ApplicationController
 
     respond_to do |format|
       format.html { redirect_to phone_numbers_url, notice: "Phone number was successfully destroyed." }
+      format.turbo_stream { render turbo_stream: turbo_stream.remove(@phone_number) }
       format.json { head :no_content }
     end
   end

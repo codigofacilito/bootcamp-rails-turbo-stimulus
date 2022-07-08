@@ -1,4 +1,4 @@
-<%= bootstrap_form_with(model: contact) do |form| %>
+<%= bootstrap_form_with(model: contact, data: { controller: "numbers", index: contact.phone_numbers.length }) do |form| %>
   <% if contact.errors.any? %>
     <div style="color: red">
       <h2><%= pluralize(contact.errors.count, "error") %> prohibited this contact from being saved:</h2>
@@ -13,6 +13,27 @@
 
   <div>
     <%= form.text_field :identifier, label: "Alias del contacto:" %>
+  </div>
+
+  <div class="my-3">
+    <p class="h3">Detalles de la persona</p>
+    <%= form.fields_for :person, @contact.person || @contact.build_person do |person_form| %>
+      <%= person_form.text_field :name, label: "Nombre de la persona" %>
+    <%end%>
+  </div>
+
+  <div class="my-3">
+    <p class="h3">Teléfonos</p>
+    
+    <%= turbo_frame_tag "numbers" do %>
+      <%= form.fields_for :phone_numbers, @contact.phone_numbers do |person_form| %>
+        <div class="mb-3">
+          <%= person_form.hidden_field :id %>
+          <%= person_form.text_field :number, label: "Número" %>
+        </div>
+      <%end%>
+    <%end%>
+    <button type="button" class="btn btn-outline" data-action="numbers#add">Añadir otro</button>
   </div>
 
   <div>

@@ -3,7 +3,7 @@ class ContactsController < ApplicationController
 
   # GET /contacts or /contacts.json
   def index
-    @contacts = Contact.all
+    @contacts = Contact.order("id desc")
   end
 
   # GET /contacts/1 or /contacts/1.json
@@ -13,6 +13,7 @@ class ContactsController < ApplicationController
   # GET /contacts/new
   def new
     @contact = Contact.new
+    @contact.phone_numbers.new
   end
 
   # GET /contacts/1/edit
@@ -41,6 +42,7 @@ class ContactsController < ApplicationController
         format.html { redirect_to contact_url(@contact), notice: "Contact was successfully updated." }
         format.json { render :show, status: :ok, location: @contact }
       else
+        puts @contact.errors.full_messages
         format.html { render :edit, status: :unprocessable_entity }
         format.json { render json: @contact.errors, status: :unprocessable_entity }
       end
@@ -65,6 +67,6 @@ class ContactsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def contact_params
-      params.require(:contact).permit(:identifier)
+      params.require(:contact).permit(:identifier, person_attributes: [:id,:name], phone_numbers_attributes: [:id,:number])
     end
 end
