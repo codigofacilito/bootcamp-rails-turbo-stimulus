@@ -1,0 +1,10 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @phone_number %>
+
+<div>
+  <%= link_to "Edit this phone number", edit_phone_number_path(@phone_number) %> |
+  <%= link_to "Back to phone numbers", phone_numbers_path %>
+
+  <%= button_to "Destroy this phone number", @phone_number, method: :delete %>
+</div>

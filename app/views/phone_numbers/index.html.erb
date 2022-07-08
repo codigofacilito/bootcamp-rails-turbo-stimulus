@@ -1,0 +1,14 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Phone numbers</h1>
+
+<div id="phone_numbers">
+  <% @phone_numbers.each do |phone_number| %>
+    <%= render phone_number %>
+    <p>
+      <%= link_to "Show this phone number", phone_number %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New phone number", new_phone_number_path %>
