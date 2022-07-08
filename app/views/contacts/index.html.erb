@@ -3,12 +3,7 @@
 <h1>Contacts</h1>
 
 <div id="contacts">
-  <% @contacts.each do |contact| %>
-    <%= render contact %>
-    <p>
-      <%= link_to "Show this contact", contact %>
-    </p>
-  <% end %>
+  <%= render @contacts %>
 </div>
 
-<%= link_to "New contact", new_contact_path %>
+<div class="text-center mt-4"><%= link_to "Añadir contacto", new_contact_path, class:"fs-3" %></div>

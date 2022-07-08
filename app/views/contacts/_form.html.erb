@@ -1,4 +1,4 @@
-<%= form_with(model: contact) do |form| %>
+<%= bootstrap_form_with(model: contact) do |form| %>
   <% if contact.errors.any? %>
     <div style="color: red">
       <h2><%= pluralize(contact.errors.count, "error") %> prohibited this contact from being saved:</h2>
@@ -12,11 +12,10 @@
   <% end %>
 
   <div>
-    <%= form.label :identifier, style: "display: block" %>
-    <%= form.text_field :identifier %>
+    <%= form.text_field :identifier, label: "Alias del contacto:" %>
   </div>
 
   <div>
-    <%= form.submit %>
+    <%= form.submit "Guardar", class:"btn btn-primary fs-4 block w-100" %>
   </div>
 <% end %>
